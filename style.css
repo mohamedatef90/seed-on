@@ -10,7 +10,7 @@
   }
   
   body {
-    font-family: sans-serif;
+    font-family: 'Cairo', Arial, Helvetica, sans-serif !important;
     line-height: 1.6;
     color: #333;
   }
@@ -21,12 +21,8 @@
   }
   
   /* Buttons */
-  .btn {
-    display: inline-block;
-    text-decoration: none;
-    padding: 0.75em 1.5em;
-    border-radius: 4px;
-    transition: background 0.3s;
+  .btn, .btn-lg, .btn-primary, .btn-outline-primary, .btn-light {
+    border-radius: 10px !important;
   }
   .btn--primary {
     background: linear-gradient(90deg, #4581BF 0%, #4395C2 50%, #44ADC5 100%);
@@ -87,9 +83,10 @@
     z-index: 3;
   }
   .hero__title {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 3.5rem;
+    font-weight: 900;
     color: #fff;
+    font-family: 'Cairo', Arial, Helvetica, sans-serif !important;
   }
   .hero__subtitle {
     font-size: 1.125rem;
@@ -97,8 +94,10 @@
     color: #fff;
   }
   .hero h3 {
+    font-size: 2rem;
+    font-weight: 900;
     color: #fff;
-    margin-bottom: 1rem;
+    font-family: 'Cairo', Arial, Helvetica, sans-serif !important;
   }
   .hero__buttons .btn {
     margin: 0 0.5rem;
@@ -107,9 +106,11 @@
   /* Section Titles */
   .section__title {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.75rem;
+    font-weight: 900;
     margin-bottom: 1.5rem;
     position: relative;
+    font-family: 'Cairo', Arial, Helvetica, sans-serif !important;
   }
   .section__title::after {
     content: '';
@@ -215,6 +216,28 @@
   }
   
   /* Portfolio */
+  .portfolio {
+    position: relative;
+    z-index: 1;
+    background: #fff;
+  }
+  .portfolio::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: url('data:image/svg+xml;utf8,<svg width="100%25" height="100%25" viewBox="0 0 1440 320" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,288L48,272C96,256,192,224,288,197.3C384,171,480,149,576,154.7C672,160,768,192,864,197.3C960,203,1056,181,1152,154.7C1248,128,1344,96,1392,80L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="%235EC6FF" fill-opacity="0.32"/><path d="M0,256L48,229.3C96,203,192,149,288,154.7C384,160,480,224,576,229.3C672,235,768,181,864,176C960,171,1056,213,1152,218.7C1248,224,1344,192,1392,176L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="%236FE3FF" fill-opacity="0.38"/><path d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,229.3C672,235,768,213,864,197.3C960,181,1056,171,1152,176C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z" fill="%23A6F6FF" fill-opacity="0.32"/></svg>');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    opacity: 1;
+  }
+  .portfolio > .container {
+    position: relative;
+    z-index: 1;
+  }
+  
   .portfolio__intro {
     text-align: center;
     margin-bottom: 2rem;
@@ -543,4 +566,43 @@
       margin: 0.25rem 0;
       padding: 0.75rem 1rem !important;
     }
+  }
+
+  body, html {
+    font-family: 'Cairo', Arial, Helvetica, sans-serif !important;
+  }
+  h1, h2, h3, h4, h5, h6, .navbar, .btn, .form-control, .section__title {
+    font-family: 'Cairo', Arial, Helvetica, sans-serif !important;
+  }
+
+  @media (max-width: 767.98px) {
+    .section__title {
+      font-size: 2rem;
+    }
+    .hero__title {
+      font-size: 2.25rem;
+    }
+    .hero h3 {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* Glassmorphism Card */
+  .card, .glass-card {
+    background: rgba(255, 255, 255, 0.18) !important;
+    border-radius: 20px !important;
+    border-top-right-radius: 48px !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255, 255, 255, 0.35) !important;
+    color: #222;
+    transition: box-shadow 0.3s;
+  }
+  .card:hover, .glass-card:hover {
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25) !important;
+  }
+  .glass-demo {
+    background: linear-gradient(135deg, #4581BF 0%, #44ADC5 100%);
+    min-height: 350px;
   }

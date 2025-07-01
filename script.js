@@ -13,30 +13,92 @@ document.addEventListener('DOMContentLoaded', function() {
   
   window.addEventListener('scroll', handleNavbarScroll);
   
-  // Services view more functionality
+  // Services view more functionality (show 6 by default)
   const viewMoreBtn = document.getElementById('viewMoreBtn');
-  const hiddenServices = document.querySelectorAll('.service-hidden');
+  const serviceItems = document.querySelectorAll('.service-item');
   let isExpanded = false;
+  let defaultVisible = 6;
+  
+  function updateServiceVisibility() {
+    serviceItems.forEach((item, idx) => {
+      if (idx < defaultVisible) {
+        item.classList.remove('service-hidden');
+        item.classList.add('show');
+      } else {
+        if (!isExpanded) {
+          item.classList.add('service-hidden');
+          item.classList.remove('show');
+        } else {
+          item.classList.remove('service-hidden');
+          setTimeout(() => item.classList.add('show'), (idx-defaultVisible)*100);
+        }
+      }
+    });
+    if (viewMoreBtn) viewMoreBtn.textContent = isExpanded ? 'عرض أقل' : 'عرض المزيد';
+  }
   
   if (viewMoreBtn) {
+    updateServiceVisibility();
     viewMoreBtn.addEventListener('click', function() {
-      if (!isExpanded) {
-        // Show hidden services
-        hiddenServices.forEach((service, index) => {
-          setTimeout(() => {
-            service.classList.add('show');
-          }, index * 100); // Stagger the animation
-        });
-        viewMoreBtn.textContent = 'عرض أقل';
-        isExpanded = true;
-      } else {
-        // Hide services
-        hiddenServices.forEach(service => {
-          service.classList.remove('show');
-        });
-        viewMoreBtn.textContent = 'عرض المزيد';
-        isExpanded = false;
+      isExpanded = !isExpanded;
+      updateServiceVisibility();
+    });
+  }
+  
+  // Get Service button functionality
+  const serviceContactModal = document.getElementById('serviceContactModal');
+  const serviceContactService = document.getElementById('serviceContactService');
+  document.querySelectorAll('.get-service').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      const card = this.closest('.service-card');
+      if (card && serviceContactService) {
+        const title = card.querySelector('.card-title')?.textContent || '';
+        serviceContactService.value = title;
       }
+      if (serviceContactModal) {
+        const modal = new bootstrap.Modal(serviceContactModal);
+        modal.show();
+      }
+    });
+  });
+  
+  // Service contact form handling
+  const serviceContactForm = document.getElementById('serviceContactForm');
+  if (serviceContactForm) {
+    serviceContactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('serviceContactName').value;
+      const email = document.getElementById('serviceContactEmail').value;
+      const mobile = document.getElementById('serviceContactMobile').value;
+      const service = document.getElementById('serviceContactService').value;
+      if (!name || !email || !mobile) {
+        alert('يرجى ملء جميع الحقول المطلوبة');
+        return;
+      }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert('يرجى إدخال بريد إلكتروني صحيح');
+        return;
+      }
+      const mobileRegex = /^(05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/;
+      if (!mobileRegex.test(mobile.replace(/\s/g, ''))) {
+        alert('يرجى إدخال رقم جوال صحيح');
+        return;
+      }
+      // Success feedback
+      const submitBtn = serviceContactForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = '<i class="bi bi-check-circle me-2"></i>تم الإرسال بنجاح';
+      submitBtn.disabled = true;
+      serviceContactForm.reset();
+      setTimeout(() => {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        const modal = bootstrap.Modal.getInstance(serviceContactModal);
+        if (modal) modal.hide();
+      }, 2500);
+      // Here you would typically send the data to your server
+      console.log('Service form submitted:', { name, email, mobile, service });
     });
   }
   
