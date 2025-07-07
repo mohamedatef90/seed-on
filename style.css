@@ -634,3 +634,45 @@
     background: linear-gradient(135deg, #4581BF 0%, #44ADC5 100%);
     min-height: 350px;
   }
+
+  /* Custom rounded-pill, centered, ice white navbar */
+  #mainNavbar {
+    border-radius: 50px !important;
+    width: 75%;
+    margin: 24px auto 0 auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    background: transparent !important;
+    box-shadow: none !important;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  #mainNavbar.scrolled {
+    background: #f8fafc !important;
+    box-shadow: 0 4px 24px 0 rgba(31, 38, 135, 0.15) !important;
+    border: 0.5px solid rgb(197, 197, 197) !important;
+  }
+
+  #mainNavbar .navbar-nav .nav-link {
+    color: #222 !important;
+    text-shadow: none;
+  }
+  #mainNavbar .navbar-brand {
+    color: #222 !important;
+    text-shadow: none;
+  }
+  #mainNavbar .navbar-nav .nav-link.active {
+    color: #4581BF !important;
+    background: rgba(68, 173, 197, 0.08);
+  }
+  #mainNavbar .navbar-nav .nav-link:hover {
+    background: rgba(68, 173, 197, 0.10);
+    color: #4581BF !important;
+  }
+
+  @media (max-width: 991.98px) {
+    #mainNavbar {
+      width: 98%;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+  }
